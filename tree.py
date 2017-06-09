@@ -3,13 +3,13 @@ import pandas as pd
 from sklearn import tree
 from sklearn.tree import DecisionTreeClassifier,export_graphviz
 
-df=pd.read_csv("dataset.csv")
+df=pd.read_csv("dataset.csv")                                     #KDDCUP1999 dataset
 
 def encode_target(df, target_column):
     df_mod = df.copy()
-    targets = df_mod[target_column].unique()
-    map_to_int = {name: n for n, name in enumerate(targets)}
-    df_mod["Target"] = df_mod[target_column].replace(map_to_int)
+    targets = df_mod[target_column].unique()                      #List of targets
+    map_to_int = {name: n for n, name in enumerate(targets)}      #Assign each target an integer
+    df_mod["Target"] = df_mod[target_column].replace(map_to_int)  #Make a new column named Target which contains the integer values of the targets
     return (df_mod, targets)
 
 def encode_feature1(df, feature_column):
@@ -77,20 +77,10 @@ def get_code(tree, feature_names, target_names,
 
     recurse(left, right, threshold, features, 0, 0)
 
-df2,features1 = encode_feature1(df,"protocol_type")
+df2,features1 = encode_feature1(df,"protocol_type")               #All the features and target which are of string type are converted into integer values
 df3,features2 = encode_feature2(df2,"service")
 df4,features3 = encode_feature3(df3,"flag")
 df5,targets = encode_target(df4,"result")
-
-'''print(df5[["Target", "result"]].head())
-print(df5[["protocol_type_int", "protocol_type"]].head())
-print(df5[["service_int", "service"]].head())
-print(df5[["flag_int", "flag"]].head())
-print(df5[["protocol_type_int", "protocol_type"]].tail())'''
-print features1
-print features2
-print features3
-
 
 del df5["protocol_type"]
 del df5["service"]
@@ -99,8 +89,6 @@ del df5["result"]
 
 features = list(df5.columns[:41])
 
-#test_data=[0,1032,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,511,511,0.00,0.00,0.00,0.00,1.00,0.00,0.00,208,63,0.30,0.01,0.30,0.00,0.00,0.00,0.00,0.00,2,9,0]
-#test_data1=[0,215,2996,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,23,23,0.00,0.00,0.00,0.00,1.00,0.00,0.00,255,255,1.00,0.00,0.00,0.00,0.00,0.00,0.00,0.00,0,0,0]
 test_data2=[0,1032,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,511,511,0,0,0,0,1,0,0,255,255,1,0,1,0,0,0,0,0,2,9,0]
 
 y=df5["Target"]
