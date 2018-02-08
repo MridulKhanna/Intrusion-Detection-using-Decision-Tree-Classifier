@@ -1,6 +1,6 @@
 import numpy as np
 import pandas as pd
-from sklearn import tree
+from sklearn import tree                                    #scikit-learn library (machine learning librry in Python)
 from sklearn.tree import DecisionTreeClassifier,export_graphviz
 
 df=pd.read_csv("dataset.csv")                               #KDDCUP1999 dataset(Pandas library is used for reading the .csv file)
@@ -77,7 +77,7 @@ def get_code(tree, feature_names, target_names,                 #generating the 
 
     recurse(left, right, threshold, features, 0, 0)
 
-df2,features1 = encode_feature1(df,"protocol_type")               
+df2,features1 = encode_feature1(df,"protocol_type")       #encode the features and the targets        
 df3,features2 = encode_feature2(df2,"service")
 df4,features3 = encode_feature3(df3,"flag")
 df5,targets = encode_target(df4,"result")
