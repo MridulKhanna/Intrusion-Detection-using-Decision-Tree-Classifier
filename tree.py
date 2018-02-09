@@ -93,7 +93,7 @@ test_data2=[0,1032,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,511,511,0,0,0,0,1,0,0,255,2
 
 y=df5["Target"]
 x=df5[features]
-dt=DecisionTreeClassifier()
+dt=DecisionTreeClassifier()         #create object of DecisionTreeClassifier class
 dt.fit(x,y)                         #fit(x,y) function is used to train the features
 
 print ("The result is ",dt.predict(test_data2))     #predicting the result
